@@ -1,13 +1,29 @@
 {
   "name": "godaddydyn",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Node.js script to update Godaddy dns records",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/lmammino/godaddy-dns.git"
+  },
+  "license" : {
+    "type" : "MIT",
+    "url" : "https://raw.githubusercontent.com/lmammino/godaddy-dns/master/LICENSE"
+  },
+  "bin" : {
+    "godaddy-dns" : "./godaddy-dns.js"
+  },
   "scripts": {
     "test": "./node_modules/.bin/xo index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name" : "Luciano Mammino",
+    "email" : "lucianomammino@gmail.com",
+    "url" : "http://loige.co"
+  },
+  "engines" : {
+    "node" : ">=4.0.0"
+  },
   "dependencies": {
     "commander": "^2.9.0",
     "request": "^2.72.0"
