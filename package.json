@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/xo index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "xo": "^0.15.0"
   }
 }
