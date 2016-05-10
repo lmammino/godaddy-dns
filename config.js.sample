@@ -1,8 +1,0 @@
-"use strict";
-
-module.exports = {
-  "apiKey": "",
-  "secret": "", 
-  "domain": "example.com",
-  "records": [{"type": "A", "name": "subdomain", "ttl": 1}]
-}

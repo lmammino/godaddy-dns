@@ -2,12 +2,21 @@
 
 'use strict';
 
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
+const program = require('commander');
 const request = require('request');
-// const config = require('./config');
+const pkg = require('./package.json');
 
-const lastIpFile = path.join(__dirname, '.lastip');
+program
+  .version(pkg.version)
+  .option('-c, --config [file]', 'specify the configuration file to use')
+  .option('-i, --ipfile [file]', 'specify which file to use to store the last found ip')
+  .parse(process.argv);
+
+const config = JSON.parse(fs.readFileSync(program.config || './config.json', 'utf8'));
+const lastIpFile = program.ipfile || path.join(os.tmpdir(), '.lastip');
 
 function getCurrentIp() {
 	return new Promise((resolve, reject) => {
@@ -50,6 +59,7 @@ function saveLastIp(ip) {
 }
 
 function updateRecords() {
+  // TODO
 	console.log('Should update records now...');
 }
 
