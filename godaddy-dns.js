@@ -10,15 +10,18 @@ const program = require('commander');
 const request = require('request');
 const pkg = require('./package.json');
 
+const defaultConfigFile = path.join(os.homedir(),'.godaddy-dns.json');
+const defaultLastIpFile = path.join(os.tmpdir(), '.lastip');
+
 program
 	.version(pkg.version)
-	.option('-c, --config [file]', 'specify the configuration file to use')
-	.option('-i, --ipfile [file]', 'specify which file to use to store the last found ip')
+	.option('-c, --config [file]', `specify the configuration file to use (default "${defaultConfigFile}")`)
+	.option('-i, --ipfile [file]', `specify which file to use to store the last found ip (default "${defaultLastIpFile}")`)
 	.parse(process.argv)
 ;
 
-const config = JSON.parse(fs.readFileSync(program.config || './config.json', 'utf8'));
-const lastIpFile = program.ipfile || path.join(os.tmpdir(), '.lastip');
+const config = JSON.parse(fs.readFileSync(program.config || defaultConfigFile, 'utf8'));
+const lastIpFile = program.ipfile || defaultLastIpFile;
 
 function getCurrentIp() {
 	return new Promise((resolve, reject) => {
