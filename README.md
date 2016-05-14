@@ -92,7 +92,7 @@ In this scenario you might want to add an entry to your Cron configuration as
 in the following example:
 
 ```
-*/5 * * * * godaddy-dns > /var/logs/godaddy-dns.log 2>&1
+*/5 * * * * godaddy-dns > /var/log/godaddy-dns.log 2>&1
 ```
 
 In this case the script will be executed every 5 minutes and the logs will be stored
