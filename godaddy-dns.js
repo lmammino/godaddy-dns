@@ -84,8 +84,8 @@ function updateRecords(ip) {
 	})
 
 	let options = {
-		method: 'PATCH',
-		url: `https://api.godaddy.com/v1/domains/${config.domain}/records`,
+		method: 'PUT',
+		url: `https://api.godaddy.com/v1/domains/${config.domain}/records/${records[0].type}/${records[0].name.replace("@","%40")}`,
 		headers: {
 			authorization: `sso-key ${config.apiKey}:${config.secret}`,
 			'content-type': 'application/json'
