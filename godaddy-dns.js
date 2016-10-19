@@ -2,12 +2,12 @@
 
 'use strict';
 
+const Promise = require('bluebird');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const extend = require('util')._extend;
 const program = require('commander');
-const request = require('request');
+const request = require('request-promise');
 const pkg = require('./package.json');
 
 const defaultConfigFile = path.join(os.homedir(),'.godaddy-dns.json');
@@ -24,15 +24,7 @@ const config = JSON.parse(fs.readFileSync(program.config || defaultConfigFile, '
 const lastIpFile = program.ipfile || defaultLastIpFile;
 
 function getCurrentIp() {
-	return new Promise((resolve, reject) => {
-		request('https://api.ipify.org/', (err, response, ip) => {
-			if (err) {
-				return reject(err);
-			}
-
-			resolve(ip);
-		});
-	});
+    return request('https://api.ipify.org/');
 }
 
 function getLastIp() {
@@ -80,33 +72,27 @@ function updateRecords(ip) {
 		if (typeof record === 'string') {
 			record = {name: record};
 		}
-		return extend(recordDefaults, record);
-	})
-
-	let options = {
-		method: 'PUT',
-		url: `https://api.godaddy.com/v1/domains/${config.domain}/records/${records[0].type}/${records[0].name.replace("@","%40")}`,
-		headers: {
-			authorization: `sso-key ${config.apiKey}:${config.secret}`,
-			'content-type': 'application/json'
-		},
-		body: records,
-		json: true
-	};
-
-	return new Promise((resolve, reject) => {
-		request(options, (err, response, body) => {
-			if (err) {
-				return reject(`Failed request to GoDaddy Api ${err}`);
-			};
-
-			if (response.statusCode !== 200) {
-				return reject(`Failed request to GoDaddy Api ${body.message}`);
-			}
-
-			resolve(body);
-		});
+		return Object.assign(record, recordDefaults);
 	});
+
+	return Promise.resolve(records)
+	    .each((record) => {
+
+            let options = {
+                method: 'PUT',
+                url: `https://api.godaddy.com/v1/domains/${config.domain}/records/${record.type}/${record.name.replace("@","%40")}`,
+                headers: {
+                    authorization: `sso-key ${config.apiKey}:${config.secret}`,
+                    'content-type': 'application/json'
+                },
+                body: record,
+                json: true
+            };
+
+            return request(options);
+
+	    });
+
 }
 
 let lastIp;
