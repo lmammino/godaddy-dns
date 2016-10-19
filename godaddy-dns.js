@@ -5,7 +5,6 @@
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const extend = require('util')._extend;
 const program = require('commander');
 const request = require('request');
 const pkg = require('./package.json');
@@ -80,8 +79,8 @@ function updateRecords(ip) {
 		if (typeof record === 'string') {
 			record = {name: record};
 		}
-		return extend(recordDefaults, record);
-	})
+		return Object.assign(record, recordDefaults);
+	});
 
 	let options = {
 		method: 'PUT',
