@@ -3,30 +3,32 @@
   "version": "1.0.1",
   "description": "A Node.js script to programmatically update GoDaddy DNS records",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/lmammino/godaddy-dns.git"
+    "type": "git",
+    "url": "https://github.com/lmammino/godaddy-dns.git"
   },
-  "license" : {
-    "type" : "MIT",
-    "url" : "https://raw.githubusercontent.com/lmammino/godaddy-dns/master/LICENSE"
+  "license": {
+    "type": "MIT",
+    "url": "https://raw.githubusercontent.com/lmammino/godaddy-dns/master/LICENSE"
   },
-  "bin" : {
-    "godaddy-dns" : "./godaddy-dns.js"
+  "bin": {
+    "godaddy-dns": "./godaddy-dns.js"
   },
   "scripts": {
     "test": "./node_modules/.bin/xo index.js"
   },
   "author": {
-    "name" : "Luciano Mammino",
-    "email" : "lucianomammino@gmail.com",
-    "url" : "http://loige.co"
+    "name": "Luciano Mammino",
+    "email": "lucianomammino@gmail.com",
+    "url": "http://loige.co"
   },
-  "engines" : {
-    "node" : ">=4.0.0"
+  "engines": {
+    "node": ">=4.0.0"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "commander": "^2.9.0",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "xo": "^0.15.0"
