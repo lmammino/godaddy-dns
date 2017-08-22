@@ -1,6 +1,6 @@
 {
   "name": "godaddy-dns",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node.js script to programmatically update GoDaddy DNS records",
   "repository": {
     "type": "git",
