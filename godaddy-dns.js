@@ -72,7 +72,7 @@ function updateRecords(ip) {
 		if (typeof record === 'string') {
 			record = {name: record};
 		}
-		return Object.assign(record, recordDefaults);
+		return Object.assign(recordDefaults, record);
 	});
 
 	return Promise.resolve(records)
