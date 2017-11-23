@@ -77,10 +77,14 @@ function updateRecords(ip) {
 
 	return Promise.resolve(records)
 	    .each((record) => {
-
+			let domain=config.domain;
+			if(typeof(record.domain) !== "undefined"){
+				domain=record.domain;
+				delete record['domain'];
+			}
             let options = {
                 method: 'PUT',
-                url: `https://api.godaddy.com/v1/domains/${config.domain}/records/${record.type}/${record.name.replace("@","%40")}`,
+                url: `https://api.godaddy.com/v1/domains/${domain}/records/${record.type}/${record.name.replace("@","%40")}`,
                 headers: {
                     authorization: `sso-key ${config.apiKey}:${config.secret}`,
                     'content-type': 'application/json'
@@ -106,6 +110,7 @@ getLastIp()
 .then((ip) => {
 	currentIp = ip;
 	if (lastIp === currentIp) {
+		console.log(`[${new Date()}] Current ip and last ip match. No update neccessary.`);
 		return Promise.reject()
 	}
 
