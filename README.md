@@ -72,6 +72,28 @@ See [config.json.sample](config.json.sample) for an example of how to structure
 your `config.json`.
 
 
+## Update multiple domains
+
+If you need to update multiple domains you can use the option `domain` in the records array as in the following configuration example:
+
+```json
+{
+  "apiKey": "",
+  "secret": "",
+  "domain": "example.com",
+  "records": [
+    {"type": "A", "name": "mysubdomain", "ttl": 600},
+    {"domain":"my-other-domain.com", "type": "A", "name": "subdomain2", "ttl": 600} //overrides main domain name (example.com)
+  ]
+}
+```
+
+In this example, everytime a new IP is detected the following domains will be updated:
+
+ - `mysubdomain.example.com`
+ - `subdomain2.my-other-domain.com`
+
+
 ## Last IP cache
 
 To avoid to send useless requests to the GoDaddy API (e.g. when the IP is not

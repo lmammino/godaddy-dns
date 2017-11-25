@@ -2,15 +2,15 @@
 
 'use strict';
 
-const Promise = require('bluebird');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
+const Promise = require('bluebird');
 const program = require('commander');
 const request = require('request-promise');
 const pkg = require('./package.json');
 
-const defaultConfigFile = path.join(os.homedir(),'.godaddy-dns.json');
+const defaultConfigFile = path.join(os.homedir(), '.godaddy-dns.json');
 const defaultLastIpFile = path.join(os.tmpdir(), '.lastip');
 
 program
@@ -24,7 +24,7 @@ const config = JSON.parse(fs.readFileSync(program.config || defaultConfigFile, '
 const lastIpFile = program.ipfile || defaultLastIpFile;
 
 function getCurrentIp() {
-    return request('https://api.ipify.org/');
+	return request('https://api.ipify.org/');
 }
 
 function getLastIp() {
@@ -75,24 +75,24 @@ function updateRecords(ip) {
 		return Object.assign({}, recordDefaults, record);
 	});
 
-	return Promise.resolve(records)
-	    .each((record) => {
-
-            let options = {
-                method: 'PUT',
-                url: `https://api.godaddy.com/v1/domains/${config.domain}/records/${record.type}/${record.name.replace("@","%40")}`,
-                headers: {
-                    authorization: `sso-key ${config.apiKey}:${config.secret}`,
-                    'content-type': 'application/json'
-                },
-                body: record,
-                json: true
-            };
-
-            return request(options);
-
-	    });
-
+	return Promise.resolve(records).each((record) => {
+		let domain = config.domain;
+		if (typeof (record.domain) !== 'undefined') {
+			domain = record.domain;
+			delete record.domain;
+		}
+		let options = {
+			method: 'PUT',
+			url: `https://api.godaddy.com/v1/domains/${domain}/records/${record.type}/${record.name.replace('@', '%40')}`,
+			headers: {
+				'authorization': `sso-key ${config.apiKey}:${config.secret}`,
+				'content-type': 'application/json'
+			},
+			body: record,
+			json: true
+		};
+		return request(options);
+	});
 }
 
 let lastIp;
@@ -106,7 +106,8 @@ getLastIp()
 .then((ip) => {
 	currentIp = ip;
 	if (lastIp === currentIp) {
-		return Promise.reject()
+		console.log(`[${new Date()}] Current ip and last ip match. No update neccessary.`);
+		return Promise.reject();
 	}
 
 	return updateRecords(currentIp);

@@ -2,5 +2,7 @@
   "apiKey": "",
   "secret": "",
   "domain": "example.com",
-  "records": [{"type": "A", "name": "mysubdomain", "ttl": 600}]
+  "records": [
+    {"type": "A", "name": "mysubdomain", "ttl": 600}
+  ]
 }
