@@ -3,8 +3,6 @@
   "secret": "",
   "domain": "example.com",
   "records": [
-    {"type": "A", "name": "mysubdomain", "ttl": 600},
-    {"domain":"my-other-domain.com", "type": "A", "name": "subdomain2", "ttl": 600} //overrides main domain name
+    {"type": "A", "name": "mysubdomain", "ttl": 600}
   ]
-
 }
