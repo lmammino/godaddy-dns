@@ -3,8 +3,8 @@
 A Node.js script to programmatically update GoDaddy DNS records
 
 [![npm version](https://badge.fury.io/js/godaddy-dns.svg)](http://badge.fury.io/js/godaddy-dns)
-
-[![NPM](https://nodei.co/npm/godaddy-dns.png)](https://nodei.co/npm/godaddy-dns/)
+[![CircleCI](https://circleci.com/gh/lmammino/godaddy-dns.svg?style=shield)](https://circleci.com/gh/lmammino/godaddy-dns)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ---
 
@@ -22,7 +22,7 @@ godaddy-dns -c config.json
 
 ## Requirements
 
-This script requires **Node.js** (version >= 4.0.0) and a valid GoDaddy API **key**
+This script requires **Node.js** (version >= 6.0.0) and a valid GoDaddy API **key**
 and **secret**. You can get register a new key on your [GoDaddy developer page](https://developer.godaddy.com/keys/)
 
 
@@ -43,6 +43,11 @@ in your system. Give it a try with:
 ```bash
 godaddy-dns -V
 ```
+
+
+### Binaries
+
+From version 1.1.0, you can also install godaddy-dns by simply downloading the binary executable file for your operative system in the [Releases](https://github.com/lmammino/godaddy-dns/releases) section.
 
 
 ## Configuration

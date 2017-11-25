@@ -1,6 +1,6 @@
 {
   "name": "godaddy-dns",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A Node.js script to programmatically update GoDaddy DNS records",
   "repository": {
     "type": "git",
@@ -14,23 +14,31 @@
     "godaddy-dns": "./godaddy-dns.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/xo godaddy-dns.js"
+    "test": "eslint godaddy-dns.js",
+    "package:create": "pkg . -t node6-win,node6-macos,node6-linux --out-dir build",
+    "package:publish": "node scripts/publish-release $GITHUB_TOKEN lmammino/godaddy-dns $npm_package_version",
+    "release:tag": "git tag $npm_package_version && git push --tags"
   },
   "author": {
     "name": "Luciano Mammino",
-    "email": "lucianomammino@gmail.com",
-    "url": "http://loige.co"
+    "url": "https://loige.co"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
+  "engine-strict": true,
   "dependencies": {
-    "bluebird": "^3.4.6",
     "commander": "^2.9.0",
-    "request": "^2.72.0",
-    "request-promise": "^4.1.1"
+    "request": "^2.72.0"
   },
   "devDependencies": {
-    "xo": "^0.15.1"
+    "eslint": "^4.11.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "pkg": "^4.3.0-beta.1",
+    "request-promise": "^4.2.2"
   }
 }

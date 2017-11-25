@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          name: NPM Setup
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm test
+      - deploy:
+          name: Deploy to GitHub and NPM
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run package:create
+              npm run package:publish
+              npm publish
+              npm run release:tag
+            fi
