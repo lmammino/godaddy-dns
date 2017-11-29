@@ -1,6 +1,6 @@
 {
   "name": "godaddy-dns",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Node.js script to programmatically update GoDaddy DNS records",
   "repository": {
     "type": "git",
@@ -21,15 +21,24 @@
   },
   "author": {
     "name": "Luciano Mammino",
+    "email": "lucianomammino@gmail.com",
     "url": "https://loige.co"
   },
+  "contributors": [
+    {
+      "name": "Jon Inazio Sánchez Martínez",
+      "email": "captain06@gmail.com",
+      "url": "https://www.joninx.com/"
+    }
+  ],
   "engines": {
     "node": ">=6.0.0"
   },
   "engine-strict": true,
   "dependencies": {
     "commander": "^2.9.0",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "eslint": "^4.11.0",
@@ -38,7 +47,6 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "pkg": "^4.3.0-beta.1",
-    "request-promise": "^4.2.2"
+    "pkg": "^4.3.0-beta.1"
   }
 }
