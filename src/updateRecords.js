@@ -20,22 +20,24 @@ module.exports = function updateRecords (ip, config) {
     return Object.assign({}, recordDefaults, record)
   })
 
-  return Promise.resolve(records).each((record) => {
-    let domain = config.domain
-    if (typeof (record.domain) !== 'undefined') {
-      domain = record.domain
-      delete record.domain
-    }
-    let options = {
-      method: 'PUT',
-      url: `https://api.godaddy.com/v1/domains/${domain}/records/${record.type}/${record.name.replace('@', '%40')}`,
-      headers: {
-        'authorization': `sso-key ${config.apiKey}:${config.secret}`,
-        'content-type': 'application/json'
-      },
-      body: record,
-      json: true
-    }
-    return request(options)
-  })
+  return Promise.all(
+    records.map((record) => {
+      let domain = config.domain
+      if (typeof (record.domain) !== 'undefined') {
+        domain = record.domain
+        delete record.domain
+      }
+      let options = {
+        method: 'PUT',
+        url: `https://api.godaddy.com/v1/domains/${domain}/records/${record.type}/${record.name.replace('@', '%40')}`,
+        headers: {
+          'authorization': `sso-key ${config.apiKey}:${config.secret}`,
+          'content-type': 'application/json'
+        },
+        body: record,
+        json: true
+      }
+      return request(options)
+    })
+  )
 }
