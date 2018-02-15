@@ -143,7 +143,7 @@ Usage: godaddy-dns [options]
 
 ## Bugs and improvements
 
-If you find a bug or have an idea about how to improve this script you can [open an issue](https://github.com/lmammino/godaddy-dnsissues) or [submit a pull request](https://github.com/lmammino/godaddy-dnspulls), it will definitely make you a better person! 😝
+If you find a bug or have an idea about how to improve this script you can [open an issue](https://github.com/lmammino/godaddy-dns/issues) or [submit a pull request](https://github.com/lmammino/godaddy-dns/pulls), it will definitely make you a better person! 😝
 
 
 ## License
