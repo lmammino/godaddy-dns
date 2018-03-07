@@ -19,6 +19,7 @@ program
   .version(version)
   .option('-c, --config [file]', `specify the configuration file to use (default "${defaultConfigFile}")`)
   .option('-i, --ipfile [file]', `specify which file to use to store the last found ip (default "${defaultLastIpFile}")`)
+  .option('-f, --forceip [ipaddr]', `specify IP address (default autodetect)`)
   .parse(process.argv)
 
 const config = JSON.parse(fs.readFileSync(program.config || defaultConfigFile, 'utf8'))
@@ -30,7 +31,7 @@ let currentIp
 getLastIp(lastIpFile)
   .then((ip) => {
     lastIp = ip
-    return getCurrentIp()
+    return program.forceip || getCurrentIp()
   })
   .then((ip) => {
     currentIp = ip
