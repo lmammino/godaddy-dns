@@ -31,8 +31,14 @@
       "name": "Jon Inazio Sánchez Martínez",
       "email": "captain06@gmail.com",
       "url": "https://www.joninx.com/"
+    },
+    {
+      "name": "David Ragel Díaz-Jara",
+      "email": "david@elelog.es",
+      "url": "http://www.elelog.es/"
     }
   ],
+  "main":"src/godaddy-dns.js",
   "engines": {
     "node": ">=6.0.0"
   },
