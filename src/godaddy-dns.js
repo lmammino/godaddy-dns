@@ -1,3 +1,4 @@
 module.exports={
-    prueba:true
+    getCurrentIp:require('./getCurrentIp'),
+    updateRecords:require('./updateRecords') 
 };
