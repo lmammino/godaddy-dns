@@ -34,7 +34,7 @@ module.exports = function updateRecords (ip, config) {
           'authorization': `sso-key ${config.apiKey}:${config.secret}`,
           'content-type': 'application/json'
         },
-        body: record,
+        body: [record],
         json: true
       }
       return request(options)
