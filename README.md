@@ -19,11 +19,42 @@ Quick example:
 godaddy-dns -c config.json
 ```
 
+## Use with node.js
+
+In this branch you can use also with node.js:
+
+```javascript
+const dns=require("godaddy-dns");
+
+dns.getCurrentIp().then((currentIp)=>{
+    console.log("Current ip",currentIp);
+
+    dns.updateRecords(currentIp,{
+        "apiKey": "",
+        "secret": "",
+        "domain": "example.com",
+        "records": [
+          {"type": "A", "name": "@", "ttl": 600}
+        ]
+    })
+    .then(() => {
+        console.log(`[${new Date()}] Successfully updated DNS records to ip ${currentIp}`)
+    })
+    .catch((err) => {
+        if (err && err.message !== 'Nothing to update') {
+            console.error(`[${new Date()}] ${err}`)
+            process.exit(1)
+        }
+    });
+});
+```
 
 ## Requirements
 
 This script requires **Node.js** (version >= 6.0.0) and a valid GoDaddy API **key**
 and **secret**. You can get register a new key on your [GoDaddy developer page](https://developer.godaddy.com/keys/)
+
+Note: The link make a Test key-secret, you must create a production key-secret to make real changes.
 
 
 ## Installation
