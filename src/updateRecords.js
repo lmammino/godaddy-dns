@@ -27,6 +27,8 @@ module.exports = function updateRecords (ip, config) {
         domain = record.domain
         delete record.domain
       }
+      var records_array = []
+      records_array.push(record)
       let options = {
         method: 'PUT',
         url: `https://api.godaddy.com/v1/domains/${domain}/records/${record.type}/${record.name.replace('@', '%40')}`,
@@ -34,7 +36,7 @@ module.exports = function updateRecords (ip, config) {
           'authorization': `sso-key ${config.apiKey}:${config.secret}`,
           'content-type': 'application/json'
         },
-        body: record,
+        body: records_array,
         json: true
       }
       return request(options)
