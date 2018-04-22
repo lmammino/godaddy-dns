@@ -14,6 +14,7 @@ module.exports = function updateRecords (ip, config) {
   }
   records = records.map((record) => {
     // if current record is a single string
+    // wrap it in array
     if (typeof record === 'string') {
       record = {name: record}
     }
@@ -34,7 +35,7 @@ module.exports = function updateRecords (ip, config) {
           'authorization': `sso-key ${config.apiKey}:${config.secret}`,
           'content-type': 'application/json'
         },
-        body: record,
+        body: [ record ],
         json: true
       }
       return request(options)

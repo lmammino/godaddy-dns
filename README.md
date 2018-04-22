@@ -141,6 +141,40 @@ Usage: godaddy-dns [options]
     -i, --ipfile [file]  specify which file to use to store the last found ip (default "<user temp folder>/.lastip")
 ```
 
+
+## Programmatic usage
+
+If you want to use the features of this module in a Node.js project:
+
+```javascript
+const dns = require("godaddy-dns");
+
+dns.getCurrentIp().then((currentIp)=>{
+  console.log("Current ip",currentIp);
+
+  dns.updateRecords(currentIp,{
+    "apiKey": "",
+    "secret": "",
+    "domain": "example.com",
+    "records": [
+      {"type": "A", "name": "@", "ttl": 600}
+    ]
+  })
+  .then(() => {
+    console.log(`[${new Date()}] Successfully updated DNS records to ip ${currentIp}`)
+  })
+  .catch((err) => {
+    if (err && err.message !== 'Nothing to update') {
+      console.error(`[${new Date()}] ${err}`)
+      process.exit(1)
+    }
+  });
+});
+```
+
+Thanks [@aandrulis](https://github.com/aandrulis) for suggesting to expose this.
+
+
 ## Bugs and improvements
 
 If you find a bug or have an idea about how to improve this script you can [open an issue](https://github.com/lmammino/godaddy-dns/issues) or [submit a pull request](https://github.com/lmammino/godaddy-dns/pulls), it will definitely make you a better person! 😝
