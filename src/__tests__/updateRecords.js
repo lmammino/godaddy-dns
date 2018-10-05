@@ -23,7 +23,7 @@ test('It should update a set of records', endTest => {
         'authorization': `sso-key someKey:someSecret`,
         'content-type': 'application/json'
       },
-      body: {data: ip, type: 'A', name: '@', ttl: 600},
+      body: [ {data: ip, type: 'A', name: '@', ttl: 600} ],
       json: true
     },
     {
@@ -33,7 +33,7 @@ test('It should update a set of records', endTest => {
         'authorization': `sso-key someKey:someSecret`,
         'content-type': 'application/json'
       },
-      body: {data: ip, type: 'A', name: 'subdomain2', ttl: 700},
+      body: [ {data: ip, type: 'A', name: 'subdomain2', ttl: 700} ],
       json: true
     }
   ]
@@ -69,7 +69,7 @@ test('It should update a single record', endTest => {
       'authorization': `sso-key someKey:someSecret`,
       'content-type': 'application/json'
     },
-    body: {data: ip, type: 'A', name: '@', ttl: 600},
+    body: [ {data: ip, type: 'A', name: '@', ttl: 600} ],
     json: true
   }
 
